@@ -1,0 +1,90 @@
+{
+  "name": "epub-viewer",
+  "version": "1.0.0",
+  "description": "EPUB Viewer built with Electron, Vite, and React",
+  "main": "electron/index.cjs",
+  "homepage": "./",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "dev:vue": "vite --config vite.vue.config.js",
+    "dev:svelte": "vite --config vite.svelte.config.js",
+    "build": "vite build",
+    "build:vue": "vite build --config vite.vue.config.js",
+    "build:svelte": "vite build --config vite.svelte.config.js",
+    "preview": "vite preview",
+    "electron": "npx electron .",
+    "electron-dev": "vite build --watch --mode=development & npx electron .",
+    "electron-dev:vue": "vite build --watch --config vite.vue.config.js --mode=development & npx electron .",
+    "electron-dev:svelte": "vite build --watch --config vite.svelte.config.js --mode=development & npx electron .",
+    "electron-build": "vite build && npx electron-builder",
+    "electron-build:vue": "vite build --config vite.vue.config.js && npx electron-builder",
+    "electron-build:svelte": "vite build --config vite.svelte.config.js && npx electron-builder",
+    "electron-build:win": "vite build && electron-builder --win",
+    "electron-build:mac": "vite build && electron-builder --mac",
+    "electron-build:linux": "vite build && electron-builder --linux",
+    "electron-build:all": "vite build && electron-builder -mwl"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "vue": "^3.3.4",
+    "svelte": "^4.2.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.2.1",
+    "@vitejs/plugin-vue": "^5.0.0",
+    "@sveltejs/vite-plugin-svelte": "^3.0.0",
+    "electron": "^27.0.0",
+    "electron-builder": "^24.6.4",
+    "vite": "^5.0.8"
+  },
+  "build": {
+    "appId": "com.epubviewer.app",
+    "productName": "EPUB Viewer",
+    "files": [
+      "dist/**/*",
+      "dist-electron/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "EPUB Viewer"
+    },
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "category": "public.app-category.productivity"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "category": "Utility"
+    }
+  }
+}
